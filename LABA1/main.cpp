@@ -81,16 +81,18 @@ void ListOfNum::at(int id)
     }
     cout << endl << "Element to index " << id << ": " << tmp_ptr->node << endl;
 }
-void ListOfNum::get_size()
+int ListOfNum::get_size()
 {
-    CurrentItem = head;
+    if (isEmpty()) return 0;
     int size = 1;
-    while (CurrentItem->next != nullptr)
+    list* tmp_ptr = head;
+    while (tmp_ptr->next != nullptr) 
     {
+        tmp_ptr = tmp_ptr->next;
         size++;
-        CurrentItem = CurrentItem->next;
     }
-    cout << endl << "Size list: " << size << endl;
+    CurrentItem->node = size;
+    return size;
 }
 void ListOfNum::set(int pos, int pop)
 {
@@ -108,10 +110,12 @@ bool ListOfNum::isEmpty()
 }
 void ListOfNum::clear()
 {
-    CurrentItem = head;
-    while (CurrentItem != nullptr)
+    if (head != nullptr) 
     {
-        pop_back();
+        while (head != nullptr) 
+        {
+            pop_back();
+        }
     }
 }
 void ListOfNum::insert(int pop, int pos)
@@ -126,7 +130,7 @@ void ListOfNum::insert(int pop, int pos)
     else
     {
         list* before = head;
-        for (int i = 0; i < pos - 2; i++)
+        for (int i = 0; i < pos - 1; i++)
             before = before->next;
 
         newel->next = before->next;
@@ -153,7 +157,7 @@ void ListOfNum::insertList(ListOfNum& list_2, int pos)
 }
 int main()
 {
-    ListOfNum list_1 = ListOfNum(0);
+    ListOfNum list_1 = ListOfNum(10);
     ListOfNum list_2 = ListOfNum(4);
     list_1.CurrentItem = list_1.head;
     cout << "List #1: ";
@@ -169,62 +173,24 @@ int main()
         cout << list_2.CurrentItem->node << " | ";
         list_2.CurrentItem = list_2.CurrentItem->next;
     }
-    //list_1.push_back(23);
-    //list_1.push_front(56);
-    //list_1.pop_back();
-    //list_1.pop_front();
-    //list_1.remove(3);
-    //list_1.insert(45, 4);
-    //list_1.at(3);
-    //list_1.get_size();
-    //list_1.clear();
-    //list_1.set(4, 98);
-    //list_1.isEmpty();
-    /*list_1.insertList(list_2, 3);
-    cout << endl << "List #1 after Insert List: ";*/
-    cout << endl;
+    list_1.push_back(23);
+    list_1.push_front(56);
+    list_1.pop_back();
+    list_1.pop_front();
+    list_1.remove(3);
+    list_1.insert(45, 4);
+    list_1.at(3);
+    list_1.clear();
+    list_1.get_size();
+    list_1.get_size();
+    list_1.set(5, 23);
+    list_1.insertList(list_2, 3);
+    cout << endl << "List #1 after Insert List: ";
     list_1.CurrentItem = list_1.head;
-    for (int i = 1; i <= 9; ++i)
+    for (int i = 1; i <= 14; ++i)
     {
         cout << list_1.CurrentItem->node << " | ";
         list_1.CurrentItem = list_1.CurrentItem->next;
     }
     return 0;
 }
-/*ostream& operator<< (ostream& out, const ListOfNum& list)
-{
-    CurrentItem = head;
-    for (int i = 1; i <= 10; ++i)
-    {
-        out << i << ") " << CurrentItem->node << endl;
-        CurrentItem = CurrentItem->next;
-    }
-    return out;
-}*/
-/*for (int i = 1; i < StartNum; ++i)
-    {
-        CurrentItem = new list;
-        CurrentItem->node = Value++;
-        LastItem->next = CurrentItem;
-        CurrentItem->next = NULL;
-        LastItem = CurrentItem;
-    }*/
-    /*void pop_back()
-        {
-            list* temp = head;     //текущий элемент списка
-            list* prev = NULL;      //предыдущий элемент списка
-        //ищем последний элемент
-            while (temp->next)      //пока есть последующий
-            {
-                prev = temp;        //сохраним, как предыдущего
-                temp = temp->next;  //последующий в текущий
-            }
-            //определим, больше одного элемента в списке?
-            if (prev)               //если есть предыдущий, значит > 1 элемента
-                prev->next = NULL;  //предыдущий станет последним
-            else
-                head = NULL;       //если 1 элемент или ни одного, то обнулим адрес первого,
-                                    // т.е. список становитс¤ пустым
-            if (temp)               //есть хоть один элемент?
-                delete temp;        //удалим его
-        }*/

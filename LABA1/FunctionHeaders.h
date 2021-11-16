@@ -34,7 +34,7 @@ public:
     void pop_front();
     void remove(int n);
     void at(int id);
-    void get_size();
+    int get_size();
     void clear();
     void set(int pos, int pop);
     bool isEmpty();

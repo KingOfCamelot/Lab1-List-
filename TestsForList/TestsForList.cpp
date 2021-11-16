@@ -56,5 +56,68 @@ namespace TestsForList
 				list_1.CurrentItem = list_1.CurrentItem->next;
 			}
 		}
+		TEST_METHOD(at)
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.at(3);
+			list_1.CurrentItem = list_1.head;
+			for (int i = 0; i < 10; ++i)
+			{
+				if (i == 3) Assert::AreEqual(4, list_1.CurrentItem->node);
+				list_1.CurrentItem = list_1.CurrentItem->next;
+			}
+		}
+		TEST_METHOD(get_size)
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.CurrentItem = list_1.head;
+			list_1.get_size();
+			Assert::AreEqual(10, list_1.CurrentItem->node);
+		}
+		TEST_METHOD(set)
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.set(5, 23);
+			list_1.CurrentItem = list_1.head;
+			for (int i = 1; i <= 10; ++i)
+			{
+				if (i == 5) Assert::AreEqual(23, list_1.CurrentItem->node);
+				list_1.CurrentItem = list_1.CurrentItem->next;
+			}
+		}
+		TEST_METHOD(isEmpty)
+		{
+			ListOfNum list_1 = ListOfNum(0);
+			list_1.isEmpty();
+			bool EmptyList = list_1.CurrentItem;
+			Assert::AreEqual(true, EmptyList);
+		}
+		TEST_METHOD(insert)
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.insert(25, 4);
+			list_1.CurrentItem = list_1.head;
+			for (int i = 1; i <= 11; ++i)
+			{
+				if (i == 5) Assert::AreEqual(25, list_1.CurrentItem->node);
+				list_1.CurrentItem = list_1.CurrentItem->next;
+			}
+		}
+		TEST_METHOD(insertlist)
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			ListOfNum list_2 = ListOfNum(4);
+			list_1.insertList(list_2, 3);
+			list_1.get_size();
+			Assert::AreEqual(14, list_1.CurrentItem->node);
+		}
+		TEST_METHOD(clear)
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.clear();
+			list_1.isEmpty();
+			bool EmptyList = list_1.CurrentItem;
+			Assert::AreEqual(false, EmptyList);
+		}
 	};
 }
