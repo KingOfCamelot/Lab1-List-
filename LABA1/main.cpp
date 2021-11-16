@@ -53,7 +53,8 @@ void ListOfNum::pop_front()
         head = nullptr;
         LastItem = nullptr;
     }
-    else {
+    else 
+    {
         list* first = head->next;
         delete head;
         head = first;
@@ -71,14 +72,16 @@ void ListOfNum::remove(int n)
     previositem->next = CurrentItem->next;
     delete CurrentItem;
 }
-void ListOfNum::at(int id)
+void ListOfNum::at(int id) 
 {
     int i = 0;
     list* tmp_ptr = head;
-    while (i < id) {
+    while (i < id) 
+    {
         tmp_ptr = tmp_ptr->next;
         i++;
     }
+    CurrentItem->node = tmp_ptr->node;
     cout << endl << "Element to index " << id << ": " << tmp_ptr->node << endl;
 }
 int ListOfNum::get_size()

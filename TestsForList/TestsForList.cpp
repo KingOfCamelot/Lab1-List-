@@ -60,12 +60,7 @@ namespace TestsForList
 		{
 			ListOfNum list_1 = ListOfNum(10);
 			list_1.at(3);
-			list_1.CurrentItem = list_1.head;
-			for (int i = 0; i < 10; ++i)
-			{
-				if (i == 3) Assert::AreEqual(4, list_1.CurrentItem->node);
-				list_1.CurrentItem = list_1.CurrentItem->next;
-			}
+			Assert::AreEqual(4, list_1.CurrentItem->node);
 		}
 		TEST_METHOD(get_size)
 		{

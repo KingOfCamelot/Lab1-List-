@@ -40,5 +40,15 @@ public:
     bool isEmpty();
     void insert(int pop, int pos);
     void insertList(ListOfNum& list_2, int pos);
+    ~ListOfNum()
+    {
+        if (head != nullptr)
+        {
+            while (head != nullptr)
+            {
+                pop_back();
+            }
+        }
+    }
 };
 #endif
