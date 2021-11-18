@@ -139,10 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ImplementingClassMethods.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FunctionHeaders.h" />
+    <ClInclude Include="MethodDeclaration.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
