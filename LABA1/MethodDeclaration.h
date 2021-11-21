@@ -5,8 +5,8 @@ struct node { int info; struct node* next; };
 class ListOfNum
 {
 public:
-    node* head = NULL;
     node* CurrentItem;
+    node* head = NULL;
     node* LastItem;
     ListOfNum(int StartNum)
     {
@@ -35,11 +35,11 @@ public:
     int at(int index);
     int get_size();
     void clear();
-    void set(int index, int pop);
+    void set(int index, int value);
     bool isEmpty();
-    void insert(int pop,int index);
+    void insert(int value,int index);
     void insertList(ListOfNum& list_2,int index);
-    ~ListOfNum()
+    /*~ListOfNum()
     {
         if (head != nullptr)
         {
@@ -48,6 +48,6 @@ public:
                 pop_back();
             }
         }
-    }
+    }*/
 };
 #endif

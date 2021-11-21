@@ -1,14 +1,6 @@
 #include <iostream>
 #include "MethodDeclaration.h"
 using namespace std;
-void CheckIndex(int& index)
-{
-    while (index <= 0)
-    {
-        cout << "Your index <= 0" << endl << "Try again" << endl;
-        cin >> index;
-    }
-}
 void ListOfNum::push_back(int EndNum)
 {
     node* elem = new node;
@@ -43,6 +35,7 @@ void ListOfNum::push_front(int StartNum)
 }
 void ListOfNum::pop_back()
 {
+    if (head == nullptr) throw invalid_argument("List empty");
     node* temp = head;
     node* prev = NULL;
     while (temp->next)
@@ -56,6 +49,7 @@ void ListOfNum::pop_back()
 }
 void ListOfNum::pop_front()
 {
+    if (head == nullptr) throw invalid_argument("List empty");
     if (head->next == nullptr) {
         delete head;
         head = nullptr;
@@ -70,7 +64,8 @@ void ListOfNum::pop_front()
 }
 void ListOfNum::remove(int index)
 {
-    CheckIndex(index);
+    if (index > get_size()) throw invalid_argument("Your index > size of list");
+    if (index <= 0) throw invalid_argument("Your index <= 0");
     CurrentItem = head;
     node* previositem = 0;
     for (int i = 0; i < index; ++i)
@@ -83,7 +78,8 @@ void ListOfNum::remove(int index)
 }
 int ListOfNum::at(int index)
 {
-    CheckIndex(index);
+    if (index > get_size()) throw invalid_argument("Your index > size of list");
+    if (index <= 0) throw invalid_argument("Your index <= 0");
     int i = 0;
     node* tmp_ptr = head;
     while (i < index)
@@ -111,12 +107,14 @@ int ListOfNum::get_size()
     CurrentItem->info = size;
     return size;
 }
-void ListOfNum::set(int index, int pop)
+void ListOfNum::set(int index, int value)
 {
+    if (index > get_size()) throw invalid_argument("Your index > size of list");
+    if (index <= 0) throw invalid_argument("Your index <= 0");
     CurrentItem = head;
     for (int i = 1; i <= index; ++i)
     {
-        if (i == index) CurrentItem->info = pop;
+        if (i == index) CurrentItem->info = value;
         CurrentItem = CurrentItem->next;
     }
 }
@@ -134,11 +132,12 @@ void ListOfNum::clear()
         }
     }
 }
-void ListOfNum::insert(int pop,int index)
+void ListOfNum::insert(int value,int index)
 {
-    CheckIndex(index);
+    if (index > get_size()) throw invalid_argument("Your index > size of list");
+    if (index <= 0) throw invalid_argument("Your index <= 0");
     node* newel = new node;
-    newel->info = pop;
+    newel->info = value;
     if (index == 1)
     {
         newel->next = head;
@@ -156,7 +155,8 @@ void ListOfNum::insert(int pop,int index)
 }
 void ListOfNum::insertList(ListOfNum& list_2, int index)
 {
-    CheckIndex(index);
+    if (index > get_size()) throw invalid_argument("Your index > size of list");
+    if (index <= 0) throw invalid_argument("Your index <= 0");
     int pos2 = index;
     CurrentItem = head;
     list_2.CurrentItem = list_2.head;

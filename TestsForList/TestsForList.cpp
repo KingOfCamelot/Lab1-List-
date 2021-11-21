@@ -1,9 +1,10 @@
 ﻿#include "pch.h"
+#include <iostream>
 #include "CppUnitTest.h"
 #include "../LABA1/MethodDeclaration.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-
+using namespace std;
 
 namespace TestsForList
 {
@@ -66,6 +67,20 @@ namespace TestsForList
 			list_1.pop_back();
 			Assert::AreEqual(true, list_1.isEmpty());
 		}
+		TEST_METHOD(Pop_back_3)// if list epmty
+		{
+			ListOfNum list_1 = ListOfNum(0);
+			list_1.pop_back();
+			try
+			{
+				list_1.pop_back();
+			}
+			catch(invalid_argument& e)
+			{
+				cerr << e.what() << endl;
+				cout << "List empty";
+			}
+		}			
 		TEST_METHOD(Pop_front)
 		{
 			ListOfNum list_1 = ListOfNum(10);
@@ -79,6 +94,20 @@ namespace TestsForList
 			list_1.pop_back();
 			Assert::AreEqual(true, list_1.isEmpty());
 		}
+		TEST_METHOD(Pop_front_3)// if list epmty
+		{
+			ListOfNum list_1 = ListOfNum(0);
+			list_1.pop_back();
+			try
+			{
+				list_1.pop_front();
+			}
+			catch (invalid_argument& e)
+			{
+				cerr << e.what() << endl;
+				cout << "List empty";
+			}
+		}
 		TEST_METHOD(remove)
 		{
 			ListOfNum list_1 = ListOfNum(10);
@@ -90,11 +119,67 @@ namespace TestsForList
 				list_1.CurrentItem = list_1.CurrentItem->next;
 			}
 		}
+		TEST_METHOD(remove_2)//index > size list
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.CurrentItem = list_1.head;
+			try
+			{
+				list_1.remove(14);
+			}
+			catch (invalid_argument& e)
+			{
+				cerr << e.what() << endl;
+				cout << "Index > size of list";
+			}
+		}
+		TEST_METHOD(remove_3) //index = 0
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.CurrentItem = list_1.head;
+			try
+			{
+				list_1.remove(0);
+			}
+			catch (invalid_argument& e)
+			{
+				cerr << e.what() << endl;
+				cout << "Index = 0, start index of list is 1";
+			}
+		}
 		TEST_METHOD(at)
 		{
 			ListOfNum list_1 = ListOfNum(10);
 			list_1.at(3);
 			Assert::AreEqual(4, list_1.CurrentItem->info);
+		}
+		TEST_METHOD(at_2) //index = 0
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.CurrentItem = list_1.head;
+			try
+			{
+				list_1.at(0);
+			}
+			catch (invalid_argument& e)
+			{
+				cerr << e.what() << endl;
+				cout << "Index = 0, start index of list is 1";
+			}
+		}
+		TEST_METHOD(at_3)//index > size list
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.CurrentItem = list_1.head;
+			try
+			{
+				list_1.at(14);
+			}
+			catch (invalid_argument& e)
+			{
+				cerr << e.what() << endl;
+				cout << "Index > size of list";
+			}
 		}
 		TEST_METHOD(get_size)
 		{
@@ -102,6 +187,14 @@ namespace TestsForList
 			list_1.CurrentItem = list_1.head;
 			list_1.get_size();
 			Assert::AreEqual(10, list_1.CurrentItem->info);
+		}
+		TEST_METHOD(get_size_2) //empty list
+		{
+			ListOfNum list_1 = ListOfNum(0);
+			list_1.CurrentItem = list_1.head;
+			list_1.pop_back();
+			list_1.get_size();
+			Assert::AreEqual(0, list_1.CurrentItem->info);
 		}
 		TEST_METHOD(set)
 		{
@@ -112,6 +205,34 @@ namespace TestsForList
 			{
 				if (i == 5) Assert::AreEqual(23, list_1.CurrentItem->info);
 				list_1.CurrentItem = list_1.CurrentItem->next;
+			}
+		}
+		TEST_METHOD(set_2) //index = 0
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.CurrentItem = list_1.head;
+			try
+			{
+				list_1.set(0, 12);
+			}
+			catch (invalid_argument& e)
+			{
+				cerr << e.what() << endl;
+				cout << "Index = 0, start index of list is 1";
+			}
+		}
+		TEST_METHOD(set_3)//index > size list
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.CurrentItem = list_1.head;
+			try
+			{
+				list_1.set(14, 34);
+			}
+			catch (invalid_argument& e)
+			{
+				cerr << e.what() << endl;
+				cout << "Index > size of list";
 			}
 		}
 		TEST_METHOD(isEmpty)
@@ -136,7 +257,35 @@ namespace TestsForList
 				list_1.CurrentItem = list_1.CurrentItem->next;
 			}
 		}
-		TEST_METHOD(insert_2)// insert in beginning of the list
+		TEST_METHOD(insert_2) //index = 0
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.CurrentItem = list_1.head;
+			try
+			{
+				list_1.insert(0, 26);
+			}
+			catch (invalid_argument& e)
+			{
+				cerr << e.what() << endl;
+				cout << "Index = 0, start index of list is 1";
+			}
+		}
+		TEST_METHOD(insert_3)//index > size list
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			list_1.CurrentItem = list_1.head;
+			try
+			{
+				list_1.insert(23, 56);
+			}
+			catch (invalid_argument& e)
+			{
+				cerr << e.what() << endl;
+				cout << "Index > size of list";
+			}
+		}
+		TEST_METHOD(insert_4)// insert in beginning of the list
 		{
 			ListOfNum list_1 = ListOfNum(10);
 			list_1.insert(25, 1);
@@ -155,9 +304,45 @@ namespace TestsForList
 			list_1.get_size();
 			Assert::AreEqual(14, list_1.CurrentItem->info);
 		}
+		TEST_METHOD(insertList_2) //index = 0
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			ListOfNum list_2 = ListOfNum(4);
+			list_1.CurrentItem = list_1.head;
+			try
+			{
+				list_1.insertList(list_2, 0);
+			}
+			catch (invalid_argument& e)
+			{
+				cerr << e.what() << endl;
+				cout << "Index = 0, start index of list is 1";
+			}
+		}
+		TEST_METHOD(insertList_3)//index > size list
+		{
+			ListOfNum list_1 = ListOfNum(10);
+			ListOfNum list_2 = ListOfNum(4);
+			list_1.CurrentItem = list_1.head;
+			try
+			{
+				list_1.insertList(list_2, 34);
+			}
+			catch (invalid_argument& e)
+			{
+				cerr << e.what() << endl;
+				cout << "Index > size of list";
+			}
+		}
 		TEST_METHOD(clear)
 		{
 			ListOfNum list_1 = ListOfNum(10);
+			list_1.clear();
+			Assert::AreEqual(true, list_1.isEmpty());
+		}
+		TEST_METHOD(clear_2) // list with 1 element
+		{
+			ListOfNum list_1 = ListOfNum(1);
 			list_1.clear();
 			Assert::AreEqual(true, list_1.isEmpty());
 		}
