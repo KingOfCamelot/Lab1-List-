@@ -39,7 +39,7 @@ public:
     bool isEmpty();
     void insert(int value,int index);
     void insertList(ListOfNum& list_2,int index);
-    /*~ListOfNum()
+    ~ListOfNum()
     {
         if (head != nullptr)
         {
@@ -48,6 +48,6 @@ public:
                 pop_back();
             }
         }
-    }*/
+    }
 };
 #endif
